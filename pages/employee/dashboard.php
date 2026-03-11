@@ -1,19 +1,20 @@
 <?php
-require_once 'functions.php';
-requireEmployeeLogin();
+/**
+ * Employee Dashboard
+ * ------------------
+ * Protected page — requires employee login.
+ */
+
+require_once __DIR__ . '/../../includes/auth_guard.php';
+requireLogin('employee');
 
 $activatedNow = isset($_GET['activated']) && $_GET['activated'] === '1';
-$userName = $_SESSION['user_name'] ?? 'Employee';
+$userName     = $_SESSION['user_name'] ?? 'Employee';
+
+$pageTitle = 'Employee Dashboard';
+require_once __DIR__ . '/../../includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
     <div class="page-wrapper">
         <div class="card">
             <?php if ($activatedNow): ?>
@@ -27,8 +28,8 @@ $userName = $_SESSION['user_name'] ?? 'Employee';
                 <p>Your employee account is active and authorized.</p>
             </div>
 
-            <a href="logout.php" class="primary-btn">Log Out</a>
+            <a href="<?php echo BASE_URL; ?>/pages/logout.php" class="primary-btn">Log Out</a>
         </div>
     </div>
-</body>
-</html>
+
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>

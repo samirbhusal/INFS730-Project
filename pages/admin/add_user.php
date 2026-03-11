@@ -1,14 +1,21 @@
 <?php
-require_once 'functions.php';
+/**
+ * Admin — Add Employee
+ * --------------------
+ * Create a pending employee account and dispatch a secure activation link.
+ */
 
-$message = '';
-$error = '';
+require_once __DIR__ . '/../../includes/auth_guard.php';
+requireLogin('admin');
+
+$message       = '';
+$error         = '';
 $generatedLink = '';
-$mailInfo = '';
+$mailInfo      = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fullName = trim($_POST['full_name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
+    $email    = trim($_POST['email']     ?? '');
 
     if ($fullName === '') {
         $error = 'Employee name is required.';
@@ -32,15 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     $update = $pdo->prepare("
                         UPDATE users
-                        SET full_name = :full_name,
-                            role = 'employee',
+                        SET full_name   = :full_name,
+                            role        = 'employee',
                             user_status = 'Pending',
                             password_hash = NULL
                         WHERE id = :id
                     ");
                     $update->execute([
                         'full_name' => $fullName,
-                        'id' => $userId
+                        'id'        => $userId,
                     ]);
 
                     invalidateAllUnusedTokensForUser($userId);
@@ -51,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     ");
                     $insertUser->execute([
                         'full_name' => $fullName,
-                        'email' => $email
+                        'email'     => $email,
                     ]);
 
                     $userId = (int) $pdo->lastInsertId();
@@ -65,22 +72,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     VALUES (:user_id, :token_hash, :expires_at)
                 ");
                 $insertToken->execute([
-                    'user_id' => $userId,
+                    'user_id'    => $userId,
                     'token_hash' => $tokenHash,
-                    'expires_at' => $expiresAt
+                    'expires_at' => $expiresAt,
                 ]);
 
                 $pdo->commit();
 
-                $generatedLink = BASE_URL . '/activate.php?token=' . urlencode($plainToken);
+                $generatedLink = BASE_URL . '/activation/activate.php?token=' . urlencode($plainToken);
 
                 $mailSent = sendInvitationEmail($fullName, $email, $generatedLink, $expiresAt);
                 saveInviteLinkToLog($fullName, $email, $generatedLink, $expiresAt);
 
-                $message = 'Invitation created successfully.';
+                $message  = 'Invitation created successfully.';
                 $mailInfo = $mailSent
                     ? 'Email was sent successfully.'
-                    : 'SMTP is not configured in XAMPP, so the invitation link was saved to invite_log.txt and is also shown below for testing.';
+                    : 'SMTP is not configured, so the invitation link was saved to invite_log.txt and is also shown below for testing.';
             }
         } catch (Exception $ex) {
             if (isset($pdo) && $pdo->inTransaction()) {
@@ -90,20 +97,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+$pageTitle = 'Admin — Add Employee';
+require_once __DIR__ . '/../../includes/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Add Employee</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+
     <div class="page-wrapper">
         <div class="card">
-            <h1>Admin - Add Employee</h1>
-            <p class="subtitle">Create a pending employee account and dispatch a secure activation link.</p>
+            <h1>Add Employee</h1>
+            <p class="subtitle centered">Create a pending employee account and dispatch a secure activation link.</p>
 
             <?php if ($error): ?>
                 <div class="alert error"><?php echo e($error); ?></div>
@@ -139,9 +141,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
 
             <div class="small-links">
-                <a href="login.php">Employee Login</a>
+                <a href="<?php echo BASE_URL; ?>/pages/admin/console.php">Back to Admin Console</a>
             </div>
         </div>
     </div>
-</body>
-</html>
+
+<?php require_once __DIR__ . '/../../includes/footer.php'; ?>
