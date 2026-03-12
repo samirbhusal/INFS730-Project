@@ -1,0 +1,334 @@
+/* =============================================
+   Project730 — Unified Stylesheet
+   ============================================= */
+
+/* ── Reset & Base ─────────────────────────────── */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: radial-gradient(circle at center, #f7f7f7 0%, #eef1f3 45%, #e8edf1 100%);
+    color: #111827;
+}
+
+/* ── Page Wrappers ────────────────────────────── */
+
+.page-wrapper,
+.dashboard-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+}
+
+/* ── Cards ────────────────────────────────────── */
+
+.card,
+.login-card,
+.dashboard-card {
+    width: 100%;
+    max-width: 540px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 22px;
+    padding: 34px 36px;
+    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(8px);
+}
+
+.activation-card {
+    max-width: 520px;
+}
+
+.card h1,
+.login-card h1,
+.dashboard-card h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #111111;
+}
+
+/* ── Subtitles ────────────────────────────────── */
+
+.subtitle {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #374151;
+    margin-bottom: 24px;
+}
+
+.centered {
+    text-align: center;
+}
+
+/* ── Form Groups ──────────────────────────────── */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="text"] {
+    width: 100%;
+    height: 54px;
+    border: 2px solid #d8dde3;
+    border-radius: 9px;
+    padding: 0 14px;
+    font-size: 16px;
+    outline: none;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: #1e88e5;
+    box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.12);
+}
+
+.readonly-input {
+    background: #eef2f4 !important;
+    color: #6b7280;
+}
+
+/* ── Role Toggle (Login page) ─────────────────── */
+
+.role-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 2px solid #d7dce2;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 18px 0 24px;
+    background: #fff;
+}
+
+.role-toggle input[type="radio"] {
+    display: none;
+}
+
+.role-toggle label {
+    text-align: center;
+    padding: 12px 0;
+    font-size: 16px;
+    cursor: pointer;
+    color: #333;
+    transition: all 0.2s ease;
+}
+
+.role-toggle input[type="radio"]:checked + label {
+    background: linear-gradient(180deg, #2f9cff, #1877f2);
+    color: #fff;
+    border-radius: 999px;
+    margin: 3px;
+}
+
+/* ── Buttons ──────────────────────────────────── */
+
+button[type="submit"],
+.primary-btn,
+.logout-btn {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    padding: 14px 18px;
+    border: none;
+    border-radius: 9px;
+    background: linear-gradient(180deg, #2e97f5, #1877f2);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover:not(:disabled),
+.primary-btn:hover,
+.logout-btn:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+button[type="submit"]:disabled,
+.primary-btn:disabled {
+    background: #9dc4ea;
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.85;
+}
+
+/* ── Links ────────────────────────────────────── */
+
+.forgot-link {
+    display: block;
+    text-align: center;
+    margin-top: 22px;
+    font-size: 16px;
+    color: #6b7280;
+    text-decoration: none;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.small-links {
+    margin-top: 18px;
+    text-align: center;
+}
+
+.small-links a {
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.small-links a:hover {
+    text-decoration: underline;
+}
+
+/* ── Alerts ───────────────────────────────────── */
+
+.alert {
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.alert.error,
+.error-message {
+    background: #fdecec;
+    color: #b42318;
+    border: 1px solid #f5c2c0;
+}
+
+.error-message {
+    padding: 12px 14px;
+    border-radius: 10px;
+    margin-bottom: 18px;
+    font-size: 15px;
+}
+
+.alert.success {
+    background: #ecfdf3;
+    color: #067647;
+    border: 1px solid #abefc6;
+}
+
+.alert.info {
+    background: #eef4ff;
+    color: #1d4ed8;
+    border: 1px solid #c7d7fe;
+}
+
+/* ── Field Notes / Errors ─────────────────────── */
+
+.field-error,
+.field-note {
+    display: block;
+    margin-top: 7px;
+    font-size: 13px;
+    color: #6b7280;
+    min-height: 18px;
+}
+
+.field-error {
+    color: #b42318;
+}
+
+.success-text {
+    color: #067647;
+}
+
+.error-text {
+    color: #b42318;
+}
+
+/* ── Dashboard ────────────────────────────────── */
+
+.dashboard-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.dashboard-box {
+    background: #f8fafc;
+    border: 1px solid #d9e2ec;
+    border-radius: 10px;
+    padding: 18px;
+    margin: 16px 0 20px;
+    text-align: center;
+    color: #334155;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* ── Link Box (invitation testing) ────────────── */
+
+.link-box {
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 10px;
+    background: #f8fafc;
+    border: 1px solid #d9e2ec;
+    word-break: break-all;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.link-box a {
+    color: #0f62fe;
+    text-decoration: none;
+}
+
+.link-box a:hover {
+    text-decoration: underline;
+}
+
+/* ── Responsive ───────────────────────────────── */
+
+@media (max-width: 600px) {
+    .card,
+    .login-card,
+    .dashboard-card {
+        padding: 24px 20px;
+        border-radius: 18px;
+    }
+
+    .card h1,
+    .login-card h1,
+    .dashboard-card h1 {
+        font-size: 24px;
+    }
+
+    .subtitle,
+    .form-group label,
+    .role-toggle label,
+    button[type="submit"],
+    .forgot-link,
+    .dashboard-card p {
+        font-size: 15px;
+    }
+}
