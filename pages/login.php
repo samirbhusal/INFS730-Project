@@ -18,14 +18,20 @@ if (isset($_SESSION['role'])) {
     }
 }
 
-$error        = $_GET['error'] ?? '';
-$emailValue   = $_GET['email'] ?? '';
-$selectedRole = $_GET['role']  ?? 'employee';
+$error        = $_GET['error']   ?? '';
+$success      = $_GET['success'] ?? '';
+$emailValue   = $_GET['email']   ?? '';
+$selectedRole = $_GET['role']    ?? 'employee';
 $notice       = '';
 
 if (isset($_GET['logout'])) {
     $notice = 'You have been logged out successfully.';
 }
+
+if ($success !== '') {
+    $notice = $success;
+}
+
 
 $pageTitle = 'Sign In';
 require_once __DIR__ . '/../includes/header.php';
