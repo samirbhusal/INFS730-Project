@@ -156,10 +156,7 @@ function sendInvitationEmail(string $name, string $email, string $link, string $
 
     return mail($email, $subject, $message, $headers);
 }
-<<<<<<< Updated upstream:includes/functions.php
-=======
 
-<<<<<<< Updated upstream:Emp_Set_PW/functions.php
 function requireEmployeeLogin(): void
 {
     startAppSession();
@@ -168,7 +165,7 @@ function requireEmployeeLogin(): void
         redirectTo('login.php');
     }
 }
-=======
+
 /* ── Password Reset helpers ───────────────────── */
 
 /**
@@ -273,5 +270,4 @@ function sendResetEmail(string $name, string $email, string $link, string $expir
 
     return mail($email, $subject, $message, $headers);
 }
->>>>>>> Stashed changes:includes/functions.php
->>>>>>> Stashed changes:Emp_Set_PW/functions.php
+

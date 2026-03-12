@@ -105,8 +105,6 @@ function initActivationValidation() {
     passwordInput.addEventListener('input', updateValidation);
     confirmInput.addEventListener('input', updateValidation);
 }
-<<<<<<< Updated upstream
-=======
 
 /* ── Forgot Password Validation ───────────────── */
 
@@ -142,4 +140,4 @@ function initForgotPasswordValidation() {
         });
     }
 }
->>>>>>> Stashed changes
+

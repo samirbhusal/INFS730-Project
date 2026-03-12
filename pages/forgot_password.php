@@ -1,20 +1,13 @@
 <?php
 /**
-<<<<<<< Updated upstream
- * Password Recovery (placeholder)
-=======
  * Forgot Password
  * ----------------
  * User enters their email to request a password reset link.
->>>>>>> Stashed changes
  */
 
 require_once __DIR__ . '/../includes/functions.php';
 startAppSession();
 
-<<<<<<< Updated upstream
-$pageTitle = 'Password Recovery';
-=======
 $error    = '';
 $message  = '';
 $mailInfo = '';
@@ -84,21 +77,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $pageTitle = 'Forgot Password';
->>>>>>> Stashed changes
 require_once __DIR__ . '/../includes/header.php';
 ?>
 
     <div class="page-wrapper">
         <div class="card">
-<<<<<<< Updated upstream
-            <h1>Password Recovery</h1>
-            <p class="subtitle centered">This page represents the Password Recovery flow.</p>
-            <p class="subtitle centered">You can replace this page later with your actual reset-password form.</p>
-            <a class="primary-btn" href="<?php echo BASE_URL; ?>/pages/login.php">Back to Sign In</a>
-        </div>
-    </div>
-
-=======
             <h1>Forgot Password</h1>
             <p class="subtitle centered">Enter your email address and we'll send you a link to reset your password.</p>
 
@@ -146,5 +129,4 @@ require_once __DIR__ . '/../includes/header.php';
     <script src="<?php echo BASE_URL; ?>/public/js/validation.js"></script>
     <script>initForgotPasswordValidation();</script>
 
->>>>>>> Stashed changes
 <?php require_once __DIR__ . '/../includes/footer.php'; ?>
