@@ -4,11 +4,11 @@
 -- Run this file once to set up the database.
 -- Then seed an admin user (see INSERT at bottom).
 
-CREATE DATABASE IF NOT EXISTS project730_activation
+CREATE DATABASE IF NOT EXISTS project730_activation1
     CHARACTER SET utf8mb4
     COLLATE utf8mb4_unicode_ci;
 
-USE project730_activation;
+USE project730_activation1;
 
 -- Users table
 CREATE TABLE IF NOT EXISTS users (

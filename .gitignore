@@ -1,0 +1,12 @@
+# Logs
+invite_log.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo

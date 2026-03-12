@@ -58,29 +58,24 @@ INFS730-Project/
 
 ### Prerequisites
 
-- **MAMP** (or XAMPP) with Apache & MySQL running
-- Project folder placed in the MAMP `htdocs` directory
+- **MAMP** (macOS) or **XAMPP** (Windows) with Apache & MySQL running
+- Project folder placed in the `htdocs` directory
+
+> **Note:** The config auto-detects MAMP vs XAMPP — no manual changes needed! It handles the different ports, passwords, and connection methods automatically.
 
 ### Step 1 — Set up the database
 
-1. Open **phpMyAdmin** (`http://localhost/phpMyAdmin`)
-2. Click the **SQL** tab
-3. Copy and paste the contents of `database/schema.sql`
+1. Open **phpMyAdmin**
+   - MAMP: `http://localhost:8888/phpMyAdmin`
+   - XAMPP: `http://localhost/phpmyadmin`
+2. Click the **SQL** tab at the top (make sure no database is selected)
+3. Copy and paste the **entire** contents of `database/schema.sql`
 4. Click **Go** — this creates the database, tables, and seeds a default admin account
 
-### Step 2 — Check database config
+### Step 2 — Open in browser
 
-Open `config/database.php` and make sure the credentials match your setup:
-
-| Setting   | MAMP Default | XAMPP Default |
-|-----------|-------------|---------------|
-| `DB_HOST` | `127.0.0.1` | `127.0.0.1`   |
-| `DB_USER` | `root`       | `root`         |
-| `DB_PASS` | `root`       | _(empty)_      |
-
-### Step 3 — Open in browser
-
-Navigate to: **`http://localhost/INFS730-Project/`**
+- **MAMP (macOS):** `http://localhost:8888/INFS730-Project/`
+- **XAMPP (Windows):** `http://localhost/INFS730-Project/`
 
 You will be redirected to the login page.
 
