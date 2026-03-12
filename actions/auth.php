@@ -17,7 +17,12 @@ $email    = trim($_POST['email']    ?? '');
 $password = trim($_POST['password'] ?? '');
 $role     = trim($_POST['role']     ?? 'employee');
 
-// --- Validation ---
+// --- Validate role ---
+
+$allowedRoles = ['employee', 'admin'];
+if (!in_array($role, $allowedRoles, true)) {
+    redirectTo(BASE_URL . '/pages/login.php?error=' . urlencode('Invalid role selected.'));
+}
 
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     redirectTo(BASE_URL . '/pages/login.php?error=' . urlencode('Invalid email format.') . '&email=' . urlencode($email) . '&role=' . urlencode($role));

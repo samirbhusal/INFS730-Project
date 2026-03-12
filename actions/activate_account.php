@@ -71,6 +71,7 @@ try {
     $pdo->commit();
 
     startAppSession();
+    session_regenerate_id(true);
     $_SESSION['user_id']    = $invitation['user_id'];
     $_SESSION['user_name']  = $invitation['full_name'];
     $_SESSION['user_email'] = $invitation['email'];
