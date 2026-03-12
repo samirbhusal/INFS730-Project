@@ -1,0 +1,11 @@
+------------------------------------------
+Name: Samir Bhusal
+Email: bhusalsamir907@gmail.com
+Expires At: 2026-03-12 21:04:20
+Invitation Link: http://localhost:8888/INFS730-Project/activation/activate.php?token=0cbc3e244f6ec653975150f3a7083d397de701475cb05d306610d0230ddf1aa4
+Generated At: 2026-03-11 21:04:20
+---------- PASSWORD RESET -----------------
+Email: bhusalsamir907@gmail.com
+Expires At: 2026-03-11 22:37:59
+Reset Link: http://localhost:8888/INFS730-Project/pages/reset_password.php?token=748c75cb9494f6ac381869bf095d2167395162786c98522a7a9d0fbb93a12fea
+Generated At: 2026-03-11 21:37:59
