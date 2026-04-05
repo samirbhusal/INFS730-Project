@@ -105,3 +105,39 @@ function initActivationValidation() {
     passwordInput.addEventListener('input', updateValidation);
     confirmInput.addEventListener('input', updateValidation);
 }
+
+/* ── Forgot Password Validation ───────────────── */
+
+function initForgotPasswordValidation() {
+    var emailInput = document.getElementById('email');
+    var resetBtn   = document.getElementById('resetBtn');
+    var emailError = document.getElementById('emailError');
+
+    if (!emailInput || !resetBtn) return;
+
+    function updateButtonState() {
+        var val = emailInput.value.trim();
+        resetBtn.disabled = !isValidEmail(val);
+    }
+
+    emailInput.addEventListener('input', function () {
+        var val = emailInput.value.trim();
+        if (emailError) {
+            emailError.textContent = (val !== '' && !isValidEmail(val))
+                ? 'Please enter a valid email address.'
+                : '';
+        }
+        updateButtonState();
+    });
+
+    var form = document.getElementById('forgotForm');
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            if (!isValidEmail(emailInput.value.trim())) {
+                if (emailError) emailError.textContent = 'Please enter a valid email address.';
+                e.preventDefault();
+            }
+        });
+    }
+}
+
