@@ -56,12 +56,12 @@ function generateInvitationToken(): array
 }
 
 /**
- * Check whether a password meets the strength rules.
- * At least 8 chars, 1 uppercase, 1 digit, 1 special character.
+ * Check whether a password meets the minimum length rule.
+ * At least 6 characters.
  */
 function passwordMeetsRules(string $password): bool
 {
-    return (bool) preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/', $password);
+    return strlen($password) >= 6;
 }
 
 /**
@@ -271,3 +271,38 @@ function sendResetEmail(string $name, string $email, string $link, string $expir
     return mail($email, $subject, $message, $headers);
 }
 
+/* ── Attendance helpers ──────────────────────── */
+
+/**
+ * Fetch today's attendance record for a given user.
+ * Returns the row or null if no check-in today.
+ */
+function getTodayAttendance(int $userId): ?array
+{
+    $stmt = db()->prepare("
+        SELECT id, user_id, check_in, check_out, late_reason, created_at
+        FROM attendance
+        WHERE user_id = :user_id
+          AND DATE(check_in) = CURDATE()
+        ORDER BY check_in DESC
+        LIMIT 1
+    ");
+    $stmt->execute(['user_id' => $userId]);
+    $row = $stmt->fetch();
+
+    return $row ?: null;
+}
+
+/**
+ * Determine whether the current time is past the shift start + grace period.
+ * Returns true if the employee is late.
+ */
+function isLateCheckIn(int $shiftHour, int $shiftMinute, int $graceMinutes): bool
+{
+    $now      = new DateTime();
+    $deadline = new DateTime();
+    $deadline->setTime($shiftHour, $shiftMinute);
+    $deadline->modify("+{$graceMinutes} minutes");
+
+    return $now > $deadline;
+}

@@ -12,7 +12,41 @@ function isValidEmail(email) {
 }
 
 function isStrongPassword(password) {
-    return /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/.test(password);
+    return password.length >= 6;
+}
+
+/* ── Password Visibility Toggle ───────────────── */
+
+function initPasswordToggles() {
+    document.querySelectorAll('[data-pw-toggle]').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var inputId = btn.getAttribute('data-pw-toggle');
+            var input   = document.getElementById(inputId);
+            var eyeOn   = btn.querySelector('.eye-icon');
+            var eyeOff  = btn.querySelector('.eye-off-icon');
+            if (!input) return;
+
+            if (input.type === 'password') {
+                input.type           = 'text';
+                eyeOn.style.display  = '';
+                eyeOff.style.display = 'none';
+                btn.setAttribute('aria-label', 'Hide password');
+            } else {
+                input.type           = 'password';
+                eyeOn.style.display  = 'none';
+                eyeOff.style.display = '';
+                btn.setAttribute('aria-label', 'Show password');
+            }
+        });
+    });
+}
+
+// Run immediately if DOM is ready, otherwise wait
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPasswordToggles);
+} else {
+    initPasswordToggles();
 }
 
 /* ── Login Page Validation ────────────────────── */
@@ -75,13 +109,13 @@ function initActivationValidation() {
 
         if (passwordRules) {
             if (password === '') {
-                passwordRules.textContent = 'Must be at least 8 characters, with 1 uppercase, 1 number, and 1 special character.';
+                passwordRules.textContent = 'Must be at least 6 characters.';
                 passwordRules.className   = 'field-note';
             } else if (strong) {
-                passwordRules.textContent = 'Password strength requirement satisfied.';
+                passwordRules.textContent = 'Password length OK.';
                 passwordRules.className   = 'field-note success-text';
             } else {
-                passwordRules.textContent = 'Password does not yet meet all requirements.';
+                passwordRules.textContent = 'Password must be at least 6 characters.';
                 passwordRules.className   = 'field-note error-text';
             }
         }
